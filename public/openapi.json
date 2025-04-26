@@ -1,0 +1,46 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Notion Relay API",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "https://notion-sdk-typescript-starter.onrender.com"
+    }
+  ],
+  "paths": {
+    "/list-databases": {
+      "get": {
+        "operationId": "listDatabases",
+        "summary": "List all accessible Notion databases",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "databases": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "string" },
+                          "title": { "type": "string" },
+                          "url": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

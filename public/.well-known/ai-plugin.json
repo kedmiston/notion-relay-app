@@ -1,0 +1,18 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Notion Relay",
+  "name_for_model": "notion_relay",
+  "description_for_human": "Query and summarize leadership tasks, goals, meetings, and feedback from Notion.",
+  "description_for_model": "Plugin to query Notion databases and summarize leadership workspace data.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "https://notion-sdk-typescript-starter.onrender.com/openapi.json"
+  },
+  "logo_url": "https://notion-sdk-typescript-starter.onrender.com/logo.png",
+  "contact_email": "kedmist@gmail.com",
+  "legal_info_url": "https://notion-sdk-typescript-starter.onrender.com/legal"
+}
+
