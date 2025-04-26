@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://notion-sdk-typescript-starter.onrender.com"
+      "url": "https://notion-relay-app.onrender.com"
     }
   ],
   "paths": {
