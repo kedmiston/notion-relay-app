@@ -1,5 +1,3 @@
-// server.ts
-
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import { Client } from '@notionhq/client';
@@ -25,35 +23,8 @@ app.use('/', searchDatabase);
 app.use('/', insertTask);
 app.use('/', describeDatabase);
 
-// List Databases route
-app.get('/list-databases', async (req: Request, res: Response) => {
-  try {
-    const response = await notion.search({
-      filter: { property: 'object', value: 'database' },
-      page_size: 20
-    });
-
-    const results = response.results.map((db: any) => ({
-      id: db.id,
-      title: db?.title?.[0]?.plain_text || 'Untitled',
-      url: db.url
-    }));
-
-    res.json({ databases: results });
-  } catch (error: any) {
-    console.error('Error listing databases:', error);
-    res.status(500).json({ error: error.message });
-  }
-});
-
-// Serve plugin manifest
-app.use(
-  '/.well-known/ai-plugin.json',
-  express.static(path.join(__dirname, 'public', '.well-known', 'ai-plugin.json'))
-);
-
-// Serve OpenAPI spec
-app.use('/openapi.json', express.static(path.join(__dirname, 'public', 'openapi.json')));
+// Serve static files (important!)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Root health check
 app.get('/', (req: Request, res: Response) => {
@@ -64,4 +35,3 @@ app.get('/', (req: Request, res: Response) => {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
-
