@@ -2,8 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Notion Relay API",
-    "version": "1.0.0",
-    "description": "Relay server for querying Notion leadership databases."
+    "version": "1.0.0"
   },
   "servers": [
     {
@@ -14,12 +13,11 @@
     "/list-databases": {
       "get": {
         "operationId": "listDatabases",
-        "summary": "List all accessible Notion databases",
-        "description": "Retrieve all Notion databases available to the integration.",
-        "parameters": [],
+        "summary": "List all Notion databases",
+        "description": "Retrieves a list of all databases accessible by the Notion integration.",
         "responses": {
           "200": {
-            "description": "Successful list of databases.",
+            "description": "Successful response with list of databases",
             "content": {
               "application/json": {
                 "schema": {
@@ -33,8 +31,7 @@
                           "id": { "type": "string" },
                           "title": { "type": "string" },
                           "url": { "type": "string" }
-                        },
-                        "required": ["id", "title", "url"]
+                        }
                       }
                     }
                   }
@@ -42,15 +39,129 @@
               }
             }
           }
-        },
-        "x-openai-isUserAuthenticated": false,
-        "x-openai-api-operations": [
-          {
-            "operationType": "list",
-            "entityType": "database",
-            "description": "Lists all accessible databases in the Notion workspace."
+        }
+      }
+    },
+    "/query-database": {
+      "post": {
+        "operationId": "queryDatabase",
+        "summary": "Query a specific Notion database",
+        "description": "Queries a Notion database based on optional filter conditions.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "databaseId": { "type": "string" },
+                  "filter": { "type": "object" }
+                },
+                "required": ["databaseId"]
+              }
+            }
           }
-        ]
+        },
+        "responses": {
+          "200": {
+            "description": "Successful database query",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": { "type": "object" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-openai-isUserAuthenticated": false
+      }
+    },
+    "/search-database": {
+      "post": {
+        "operationId": "searchDatabase",
+        "summary": "Search a Notion database by keyword",
+        "description": "Searches a Notion database for entries where the keyword appears in title or description.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "databaseId": { "type": "string" },
+                  "keyword": { "type": "string" }
+                },
+                "required": ["databaseId", "keyword"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful search",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "results": {
+                      "type": "array",
+                      "items": { "type": "object" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-openai-isUserAuthenticated": false
+      }
+    },
+    "/insert-task": {
+      "post": {
+        "operationId": "insertTask",
+        "summary": "Insert a new task or goal into a Notion database",
+        "description": "Creates a new page in the specified Notion database with a name and optional description.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "databaseId": { "type": "string" },
+                  "name": { "type": "string" },
+                  "description": { "type": "string" }
+                },
+                "required": ["databaseId", "name"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Task inserted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "pageId": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-openai-isUserAuthenticated": false
       }
     }
   }
