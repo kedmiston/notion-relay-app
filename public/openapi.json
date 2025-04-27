@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Notion Relay API",
-    "version": "1.0"
+    "version": "1.0.0"
   },
   "servers": [
     {
@@ -13,10 +13,12 @@
     "/list-databases": {
       "get": {
         "operationId": "listDatabases",
-        "summary": "List all accessible Notion databases",
+        "summary": "List all Notion databases",
+        "description": "Retrieves a list of all databases accessible by the Notion integration.",
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Successful response with a list of databases",
             "content": {
               "application/json": {
                 "schema": {
@@ -38,9 +40,9 @@
               }
             }
           }
-        }
+        },
+        "x-openai-isUserAuthenticated": false
       }
     }
   }
 }
-
