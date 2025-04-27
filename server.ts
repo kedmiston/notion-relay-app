@@ -8,6 +8,7 @@ import listDatabases from './routes/listDatabases';
 import queryDatabase from './routes/queryDatabase';
 import searchDatabase from './routes/searchDatabase';
 import insertTask from './routes/insertTask';
+import describeDatabase from './routes/describeDatabase';
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use('/', listDatabases);
 app.use('/', queryDatabase);
 app.use('/', searchDatabase);
 app.use('/', insertTask);
+app.use('/', describeDatabase);
 
 // List Databases route
 app.get('/list-databases', async (req: Request, res: Response) => {
