@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { Client } from '@notionhq/client';
 import path from 'path';
 import listDatabases from './routes/listDatabases';
+import queryDatabase from './routes/queryDatabase';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ const notion = new Client({ auth: process.env.NOTION_TOKEN });
 
 app.use(express.json());
 app.use('/', listDatabases);
+app.use('/', queryDatabase);
 
 // List Databases route
 app.get('/list-databases', async (req: Request, res: Response) => {
