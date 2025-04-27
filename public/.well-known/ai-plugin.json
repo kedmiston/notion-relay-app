@@ -9,7 +9,7 @@
   },
   "api": {
     "type": "openapi",
-    "url": "https://notion-relay-app.onrender.com/openapi.json"
+    "url": "https://notion-relay-app.onrender.com/.well-known/openapi.json"
   },
   "logo_url": "https://notion-relay-app.onrender.com/logo.png",
   "contact_email": "kedmist@gmail.com",
